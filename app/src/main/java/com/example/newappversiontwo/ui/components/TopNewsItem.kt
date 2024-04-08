@@ -1,4 +1,4 @@
-package com.example.newappversiontwo.ui.screens
+package com.example.newappversiontwo.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -18,6 +18,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.newappversiontwo.MockData
+import com.example.newappversiontwo.MockData.getTimeAgo
 import com.example.newappversiontwo.NewsData
 
 @Composable
@@ -29,7 +31,7 @@ fun TopNewsItem(newsData: NewsData,onNewsClick:()->Unit={}){
         Column(modifier = Modifier
             .wrapContentHeight()
             .padding(top = 16.dp, start = 16.dp),verticalArrangement = Arrangement.SpaceBetween) {
-            Text(text = newsData.publishedAt,color = Color.White,fontWeight = FontWeight.SemiBold)
+            Text(text = MockData.stringToDate(newsData.publishedAt).getTimeAgo(),color = Color.White,fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(100.dp))
             Text(text = newsData.title,color = Color.White,fontWeight = FontWeight.SemiBold)
         }

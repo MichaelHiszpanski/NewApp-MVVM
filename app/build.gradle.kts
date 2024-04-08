@@ -40,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.11"
     }
     packaging {
         resources {
@@ -52,6 +52,7 @@ android {
 dependencies {
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("androidx.compose.material:material:1.6.5")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
