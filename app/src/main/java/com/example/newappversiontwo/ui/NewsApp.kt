@@ -1,12 +1,11 @@
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.Scaffold
+
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.newappversiontwo.MockData
 import com.example.newappversiontwo.ui.screens.TopNewsItem
 
 
@@ -32,8 +31,13 @@ fun Navigation(){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "top") {
         composable("top") { TopNews(navController) }
-        composable("detail") { DetailScreen(navController) }
-        composable("item-news") { TopNewsItem(navController) }
+        composable("detail/{newsId}",
+            arguments = listOf(navArgument("newsId"){type= NavType.IntType})
+        ) { navBackStackEntry ->
+            val id =navBackStackEntry.arguments?.getInt("newsId")
+            val newsData=MockData.getNews(id)
+            DetailScreen(navController,newsData) }
+        composable("item-news") { TopNewsItem(newsData = MockData.topNewsList[0]) }
     }
 }
 

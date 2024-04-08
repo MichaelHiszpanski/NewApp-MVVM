@@ -14,7 +14,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.newappversiontwo.MockData
-import 
+import com.example.newappversiontwo.ui.screens.TopNewsItem
+
 
 @Composable
 fun TopNews(navController: NavController){
@@ -26,7 +27,12 @@ fun TopNews(navController: NavController){
             Text(text = "Go toDetail Screen")
         }
         LazyColumn{
-            items(MockData.topNewsList)
+
+            items(MockData.topNewsList){
+                    newsData->   TopNewsItem(newsData = newsData, onNewsClick ={
+                        navController.navigate("detail/${newsData.id}")
+            } )
+            }
         }
     }
 }

@@ -10,15 +10,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.newappversiontwo.MockData
+import com.example.newappversiontwo.NewsData
 
 @Composable
-fun DetailScreen(navController: NavController){
+fun DetailScreen(navController: NavController,newsData:NewsData){
     Column ( modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally){
         Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold, color = Color.Red)
         Button(onClick = {
             navController.popBackStack()
         }) {
-            Text(text = "Go to Top News Screen")
+            Text(text = "Go to Top News Screen +${newsData.author}")
         }
     }
 }
@@ -27,5 +29,6 @@ fun DetailScreen(navController: NavController){
 @Composable
 fun DetailScreenPreview(){
     val mockNavController = rememberNavController()
-    DetailScreen(mockNavController)
+    val newsData=MockData.topNewsList
+    DetailScreen(mockNavController,newsData[0])
 }

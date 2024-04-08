@@ -1,6 +1,7 @@
 package com.example.newappversiontwo.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,8 +21,10 @@ import androidx.navigation.NavController
 import com.example.newappversiontwo.NewsData
 
 @Composable
-fun TopNewsItem(newsData: NewsData){
-    Box(modifier = Modifier.height(200.dp).padding(8.dp)) {
+fun TopNewsItem(newsData: NewsData,onNewsClick:()->Unit={}){
+    Box(modifier = Modifier.height(200.dp).padding(8.dp).clickable {
+        onNewsClick()
+    }) {
         Image(painter = painterResource(id = newsData.image), contentDescription ="",contentScale = ContentScale.FillBounds)
         Column(modifier = Modifier
             .wrapContentHeight()
