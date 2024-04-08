@@ -17,13 +17,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.example.newappversiontwo.MockData
-import com.example.newappversiontwo.MockData.getTimeAgo
-import com.example.newappversiontwo.NewsData
+import com.example.newappversiontwo.ui.models.MockData
+import com.example.newappversiontwo.ui.models.MockData.getTimeAgo
+import com.example.newappversiontwo.ui.models.NewsData
 
 @Composable
-fun TopNewsItem(newsData: NewsData,onNewsClick:()->Unit={}){
+fun TopNewsItem(newsData: NewsData, onNewsClick:()->Unit={}){
     Box(modifier = Modifier.height(200.dp).padding(8.dp).clickable {
         onNewsClick()
     }) {

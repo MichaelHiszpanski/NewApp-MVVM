@@ -1,4 +1,6 @@
-package com.example.newappversiontwo
+package com.example.newappversiontwo.ui.models
+
+import com.example.newappversiontwo.R
 
 data class NewsData(
     val id: Int,

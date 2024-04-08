@@ -1,7 +1,8 @@
-package com.example.newappversiontwo
+package com.example.newappversiontwo.ui.models
 
 import android.os.Build
 import android.util.Log
+import com.example.newappversiontwo.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -71,9 +72,10 @@ object MockData {
             title = "Principal Beaten Unconscious At Dorchester School; Classes Canceled Thursday - CBS Boston",
             description = "Principal Patricia Lampron and another employee were assaulted at Henderson Upper Campus during dismissal on Wednesday.",
             publishedAt = "2021-11-04T01:55:00Z"
-        ))
+        )
+    )
 
-    fun getNews(newsId:Int?):NewsData{
+    fun getNews(newsId:Int?): NewsData {
         return  topNewsList.first{it.id==newsId}
     }
     fun Date.getTimeAgo(): String {

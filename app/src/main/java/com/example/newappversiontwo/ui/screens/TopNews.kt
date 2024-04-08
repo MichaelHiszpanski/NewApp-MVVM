@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.newappversiontwo.MockData
+import com.example.newappversiontwo.ui.models.MockData
 import com.example.newappversiontwo.ui.components.TopNewsItem
 
 

@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.newappversiontwo.MockData
+import com.example.newappversiontwo.ui.models.MockData
 import com.example.newappversiontwo.ui.components.BottomMenu
 import com.example.newappversiontwo.ui.screens.BottomMenuScreen
 import com.example.newappversiontwo.ui.screens.CategoriesScreen
@@ -38,18 +38,14 @@ fun MainScreen(navController: NavHostController, scrollState: ScrollState){
 
 @Composable
 fun Navigation(navController: NavHostController, scrollState: ScrollState){
-    val navController = rememberNavController()
-    val scrollState = rememberScrollState()
+
     NavHost(navController = navController, startDestination = BottomMenuScreen.Categories.route) {
         bottomNavigation(navController=navController)
-//        composable("top") { TopNews(navController) }
-//        composable("categories") { CategoriesScreen() }
-//        composable("sources") { SourcesScreen()}
         composable("detail/{newsId}",
             arguments = listOf(navArgument("newsId"){type= NavType.IntType})
         ) { navBackStackEntry ->
             val id =navBackStackEntry.arguments?.getInt("newsId")
-            val newsData=MockData.getNews(id)
+            val newsData= MockData.getNews(id)
             DetailScreen(newsData, scrollState,navController) }
        // composable("item-news") { TopNewsItem(newsData = MockData.topNewsList[0]) }
     }
