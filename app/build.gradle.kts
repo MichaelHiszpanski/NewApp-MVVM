@@ -1,11 +1,15 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+//    kotlin("jvm") version "1.9.23" apply false
+//    kotlin("android") version "1.9.23" apply false
+//    kotlin("android.extensions") version "1.9.23" apply false
 }
 
 android {
     namespace = "com.example.newappversiontwo"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.example.newappversiontwo"
@@ -40,13 +44,15 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.11"
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
 dependencies {

@@ -6,12 +6,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.newappversiontwo.MockData
+import com.example.newappversiontwo.ui.components.BottomMenu
 import com.example.newappversiontwo.ui.screens.BottomMenuScreen
 import com.example.newappversiontwo.ui.screens.CategoriesScreen
 import com.example.newappversiontwo.ui.screens.SourcesScreen
@@ -27,19 +29,22 @@ fun NewsApp() {
 }
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen(navController: NavController, scrollState: ScrollState){
-    Scaffold(bottomBar = {}) {
-        Navigation()
+fun MainScreen(navController: NavHostController, scrollState: ScrollState){
+    Scaffold(bottomBar = {BottomMenu(navController)}) {
+        Navigation(navController=navController,scrollState=scrollState)
 
     }
 }
 
 @Composable
-fun Navigation(){
+fun Navigation(navController: NavHostController, scrollState: ScrollState){
     val navController = rememberNavController()
     val scrollState = rememberScrollState()
-    NavHost(navController = navController, startDestination = "top") {
-        composable("top") { TopNews(navController) }
+    NavHost(navController = navController, startDestination = BottomMenuScreen.Categories.route) {
+        bottomNavigation(navController=navController)
+//        composable("top") { TopNews(navController) }
+//        composable("categories") { CategoriesScreen() }
+//        composable("sources") { SourcesScreen()}
         composable("detail/{newsId}",
             arguments = listOf(navArgument("newsId"){type= NavType.IntType})
         ) { navBackStackEntry ->
