@@ -5,12 +5,14 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import com.example.newappversiontwo.ui.components.ArticleContent
 import com.example.newappversiontwo.ui.components.CategoryTab
 import com.example.newappversiontwo.ui.models.getAllArticleCategory
 import com.example.newappversiontwo.ui.network.NewsManager
 
 @Composable
-fun CategoriesScreen(onFetchCategory:(String)->Unit={},newsManager:NewsManager){
+fun CategoriesScreen(onFetchCategory:(String)->Unit={},newsManager:NewsManager,navController:NavController){
     val tabsItems= getAllArticleCategory()
     Text(text = "Categories Screen")
     Column {
@@ -23,5 +25,6 @@ fun CategoriesScreen(onFetchCategory:(String)->Unit={},newsManager:NewsManager){
                     isSelected = newsManager.selectedCategory.value==category)
             }
         }
+    ArticleContent(articles = newsManager.getArticleByCategory.value.articles?:listOf(), navController =navController )
     }
 }
