@@ -3,7 +3,9 @@ package com.example.newappversiontwo.ui.network
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
+import com.example.newappversiontwo.ui.models.ArticleCategory
 import com.example.newappversiontwo.ui.models.TopNewsResponse
+import com.example.newappversiontwo.ui.models.getArticleCategory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +18,7 @@ class NewsManager {
         @Composable get()=remember {
             _newsResponse
         }
+    val selectedCategory:MutableState<ArticleCategory?> = mutableStateOf(null)
     init {
         getArticles()
     }
@@ -39,5 +42,10 @@ class NewsManager {
             }
 
         })
+    }
+
+    fun onSelectedCategoryChanged(category:String){
+        val newCategory= getArticleCategory(category=category)
+        selectedCategory.value=newCategory
     }
 }

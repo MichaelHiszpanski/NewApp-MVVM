@@ -46,7 +46,7 @@ fun Navigation(navController: NavHostController, scrollState: ScrollState,newsMa
     val articles=newsManager.newsResponse.value.articles
    articles?.let{
        NavHost(navController = navController, startDestination = BottomMenuScreen.TopNews.route, modifier = Modifier.padding(paddingValues =paddingValues )) {
-           bottomNavigation(navController=navController,articles)
+           bottomNavigation(navController=navController,articles,newsManager)
            composable("detail/{index}",
                arguments = listOf(navArgument("index"){type= NavType.IntType})
            ) { navBackStackEntry ->
@@ -61,12 +61,14 @@ fun Navigation(navController: NavHostController, scrollState: ScrollState,newsMa
        }
    }
 }
-fun NavGraphBuilder.bottomNavigation(navController: NavController,articles:List<TopNewsArticle>) {
+fun NavGraphBuilder.bottomNavigation(navController: NavController,articles:List<TopNewsArticle>,newsManager: NewsManager) {
     composable(BottomMenuScreen.TopNews.route) {
         TopNews(navController = navController, articles =articles )
     }
     composable(BottomMenuScreen.Categories.route) {
-        CategoriesScreen()
+        CategoriesScreen(newsManager=newsManager, onFetchCategory = {
+            newsManager.onSelectedCategoryChanged(it)
+        })
     }
     composable(BottomMenuScreen.Sources.route) {
         SourcesScreen()
