@@ -1,6 +1,6 @@
 package com.example.newappversiontwo.ui.models
 
-import javax.xml.transform.Source
+
 
 data class TopNewsArticle(
     val source: Source?=null,
