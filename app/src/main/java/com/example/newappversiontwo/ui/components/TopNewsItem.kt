@@ -1,6 +1,5 @@
 package com.example.newappversiontwo.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,15 +15,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.newappversiontwo.R
 import com.example.newappversiontwo.ui.models.MockData
 import com.example.newappversiontwo.ui.models.MockData.getTimeAgo
-import com.example.newappversiontwo.ui.models.NewsData
 import com.example.newappversiontwo.ui.models.TopNewsArticle
-import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
 fun TopNewsItem(article: TopNewsArticle, onNewsClick:()->Unit={}){

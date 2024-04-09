@@ -59,10 +59,8 @@ fun DetailScreen(article: TopNewsArticle, scrollState: ScrollState, navControlle
 
             CoilImage(
                 imageModel = article.urlToImage,
-                // Crop, Fit, Inside, FillHeight, FillWidth, None
                 contentScale = ContentScale.Crop,
                 error = ImageBitmap.imageResource(R.drawable.breaking_news),
-                // shows a placeholder ImageBitmap when loading.
                 placeHolder = ImageBitmap.imageResource(R.drawable.breaking_news))
 
             Row(
@@ -71,7 +69,7 @@ fun DetailScreen(article: TopNewsArticle, scrollState: ScrollState, navControlle
                     .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 InfoWithIcon(Icons.Default.Edit, info = article.author?:"Not Available")
-                InfoWithIcon(icon = Icons.Default.DateRange, info = MockData.stringToDate(article.publishedAT?:"2021-11-10T14:25:20Z").getTimeAgo())
+                InfoWithIcon(icon = Icons.Default.DateRange, info = MockData.stringToDate(article.publishedAT?:"2023-11-10T14:25:20Z").getTimeAgo())
             }
 
             Text(text = article.title?:"Not Available", fontWeight = FontWeight.Bold)

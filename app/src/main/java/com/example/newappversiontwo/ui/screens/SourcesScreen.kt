@@ -25,20 +25,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.example.newappversiontwo.R
-import com.example.newappversiontwo.ui.models.TopNewsArticle
 import com.example.newappversiontwo.ui.network.NewsManager
-import androidx.compose.foundation.lazy.items
+import com.example.newappversiontwo.ui.components.SourceContent
+
 @Composable
 fun SourcesScreen(newsManager: NewsManager){
         val items= listOf(
@@ -85,58 +75,4 @@ fun SourcesScreen(newsManager: NewsManager){
            }
         }
     }
-    @Composable
-    fun SourceContent(articles:List<TopNewsArticle>){
-        val uriHandler= LocalUriHandler.current
 
-        LazyColumn{
-            items(articles){
-                    article->
-                val annotatedString= buildAnnotatedString {
-                    pushStringAnnotation(
-                        tag = "URL",
-                        annotation = article.url?:"newsapi.org"
-                    )
-                    withStyle(style = SpanStyle(color = colorResource(id = R.color.purple_500),
-                        textDecoration= TextDecoration.Underline)
-                    ){
-                        append("Read Full Article Here")
-                    }
-                }
-
-                Card(backgroundColor = colorResource(id = R.color.purple_700),
-                    elevation =6.dp, modifier = Modifier.padding(8.dp) ) {
-
-                    Column(modifier = Modifier
-                        .height(200.dp)
-                        .padding(end = 8.dp, start = 8.dp),
-                        verticalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Text(
-                            text = article.title?:"Not Available",
-                            fontWeight = FontWeight.Bold,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Text(
-                            text = article.description?:"Not Available",
-                            maxLines = 4,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        Card(backgroundColor = Color.White, elevation = 6.dp ) {
-                            ClickableText(text = annotatedString, modifier = Modifier.padding(8.dp),onClick = {
-                                annotatedString.getStringAnnotations(it,it).firstOrNull()?.let {
-                                        result ->
-                                    if (result.tag=="URL"){
-                                        uriHandler.openUri(result.item)
-                                    }
-                                }
-                            })
-                        }
-                    }
-
-                }
-
-            }
-        }
-    }
