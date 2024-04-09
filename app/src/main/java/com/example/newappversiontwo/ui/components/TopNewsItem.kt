@@ -13,26 +13,36 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.newappversiontwo.R
 import com.example.newappversiontwo.ui.models.MockData
 import com.example.newappversiontwo.ui.models.MockData.getTimeAgo
 import com.example.newappversiontwo.ui.models.NewsData
+import com.example.newappversiontwo.ui.models.TopNewsArticle
+import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
-fun TopNewsItem(newsData: NewsData, onNewsClick:()->Unit={}){
-    Box(modifier = Modifier.height(200.dp).padding(8.dp).clickable {
-        onNewsClick()
-    }) {
-        Image(painter = painterResource(id = newsData.image), contentDescription ="",contentScale = ContentScale.FillBounds)
+fun TopNewsItem(article: TopNewsArticle, onNewsClick:()->Unit={}){
+    Box(modifier = Modifier
+        .height(200.dp)
+        .padding(8.dp)
+        .clickable {
+            onNewsClick()
+        }) {
+        com.skydoves.landscapist.coil.CoilImage(imageModel = article.urlToImage, contentScale = ContentScale.Crop, error = ImageBitmap.imageResource(
+            R.drawable.breaking_news), placeHolder = ImageBitmap.imageResource(
+            R.drawable.breaking_news))
         Column(modifier = Modifier
             .wrapContentHeight()
             .padding(top = 16.dp, start = 16.dp),verticalArrangement = Arrangement.SpaceBetween) {
-            Text(text = MockData.stringToDate(newsData.publishedAt).getTimeAgo(),color = Color.White,fontWeight = FontWeight.SemiBold)
+            Text(text = MockData.stringToDate(article.publishedAT?:"2021-11-10T14:25:20Z").getTimeAgo(),color = Color.White,fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(100.dp))
-            Text(text = newsData.title,color = Color.White,fontWeight = FontWeight.SemiBold)
+            Text(text = article.title?:"Not Available",color = Color.White,fontWeight = FontWeight.SemiBold)
         }
     }
 }

@@ -61,9 +61,11 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.compose.material:material:1.6.5")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-name:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation ("com.squareup.moshi:moshi:1.12.0")
-    implementation ("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+    implementation ("com.github.skydoves:landscapist-coil:1.4.1")//display response
+   // implementation ("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

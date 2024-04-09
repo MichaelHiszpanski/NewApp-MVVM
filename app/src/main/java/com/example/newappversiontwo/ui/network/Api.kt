@@ -1,11 +1,14 @@
 package com.example.newappversiontwo.ui.network
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
-import retrofit2.Retrofit
+
 
 
 object Api {
@@ -16,7 +19,7 @@ object Api {
         .add(KotlinJsonAdapterFactory())
         .build()
 
-    val logging=HttpLoggingInterceptor()
+   // val logging=HttpLoggingInterceptor()
 
     val httpClient=OkHttpClient.Builder().apply {
         addInterceptor(
@@ -27,12 +30,12 @@ object Api {
                 return@Interceptor chain.proceed(builder.build())
             }
         )
-        logging.level=HttpLoggingInterceptor.Level.BODY
-        addNetworkInterceptor(logging)
+       // logging.level=HttpLoggingInterceptor.Level.BODY
+      //  addNetworkInterceptor(logging)
     }.build()
 
     private val retrofit = Retrofit.Builder()
-        //.addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .baseUrl(BASE_URL)
         .client(httpClient)
         .build()

@@ -16,11 +16,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.newappversiontwo.ui.models.MockData
 import com.example.newappversiontwo.ui.components.TopNewsItem
+import com.example.newappversiontwo.ui.models.TopNewsArticle
 
 
 @Composable
-fun TopNews(navController: NavController){
-    Column ( modifier = Modifier.fillMaxWidth().fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally){
+fun TopNews(navController: NavController,articles:List<TopNewsArticle>){
+    Column ( modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally){
         Text(text = "Top News", fontWeight = FontWeight.SemiBold, color = Color.Red, fontSize =22.sp )
         Button(onClick = {
             navController.navigate("detail")
@@ -29,10 +32,9 @@ fun TopNews(navController: NavController){
         }
         LazyColumn{
 
-            items(MockData.topNewsList){
-                    newsData->   TopNewsItem(newsData = newsData, onNewsClick ={
-                        navController.navigate("detail/${newsData.id}")
-            } )
+            items(articles.size){
+                    index->
+                TopNewsItem(article = articles[index])
             }
         }
     }
@@ -42,5 +44,9 @@ fun TopNews(navController: NavController){
 @Composable
 fun TopNewsPreview(){
 
-    TopNews( rememberNavController())
+    TopNews( rememberNavController(), listOf(TopNewsArticle( author = "Namita Singh",
+        title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
+        description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
+        publishedAT = "2021-11-04T04:42:40Z"))
+    )
 }
