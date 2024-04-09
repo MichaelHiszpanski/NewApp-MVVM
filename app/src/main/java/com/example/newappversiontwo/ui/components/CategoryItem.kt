@@ -12,7 +12,10 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -39,8 +42,9 @@ fun CategoryItem(article: TopNewsArticle, modifier: Modifier = Modifier, onNewsC
             CoilImage(
                 imageModel = article.urlToImage
                 , modifier = Modifier.size(100.dp),
-                placeHolder = painterResource(id = R.drawable.error),
-                error = painterResource(id = R.drawable.error)
+                contentScale = ContentScale.Crop,
+                placeHolder = ImageBitmap.imageResource(R.drawable.error),//1 painterResource(id = R.drawable.error),
+                error = ImageBitmap.imageResource(R.drawable.error),//painterResource(id = R.drawable.error)
             )
             Column(modifier.padding(8.dp)) {
                 Text(text = article.title?:"Not Available", fontWeight = FontWeight.Bold,

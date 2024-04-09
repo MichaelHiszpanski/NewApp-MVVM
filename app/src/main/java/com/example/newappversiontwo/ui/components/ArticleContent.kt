@@ -14,7 +14,7 @@ fun ArticleContent(articles:List<TopNewsArticle>, modifier: Modifier = Modifier,
          article ->
          CategoryItem(article = article, modifier = modifier, onNewsClick = {
         onNewsClick()
-        navController.navigate("InfoC/${articles.indexOf(article)}")
+        navController.navigate("Detail/${articles.indexOf(article)}")
         })
      }
 

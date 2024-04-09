@@ -12,7 +12,6 @@ interface NewsServiceInterface {
 
     @GET("top-headlines")
     fun getArticlesByCategory(@Query("category")category:String
-        // @Query("apiKey") apiKey:String
     ): Call<TopNewsResponse>
 
     @GET("everything")
