@@ -28,7 +28,7 @@ import com.example.newappversiontwo.ui.network.NewsManager
 fun SearchBar(query:MutableState<String>,newsManager: NewsManager){
     val localFocusManager= LocalFocusManager.current
     Card(elevation = 6.dp, shape = RoundedCornerShape(4.dp),
-    modifier = Modifier.padding(8.dp),
+    modifier = Modifier.padding(9.dp),
     backgroundColor = MaterialTheme.colors.primary) {
         TextField(value = query.value, onValueChange = {
             query.value=it
