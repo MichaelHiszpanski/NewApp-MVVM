@@ -28,6 +28,8 @@ fun TopNewsItem(article: TopNewsArticle, onNewsClick:()->Unit={}){
         .height(200.dp)
         .padding(8.dp)
         .clickable {
+            print("Hello 1 =====>")
+            println(article)
             onNewsClick()
         }) {
         com.skydoves.landscapist.coil.CoilImage(imageModel = article.urlToImage, contentScale = ContentScale.Crop, error = ImageBitmap.imageResource(

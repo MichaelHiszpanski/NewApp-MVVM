@@ -55,7 +55,8 @@ fun DetailScreen(article: TopNewsArticle, scrollState: ScrollState, navControlle
                 .verticalScroll(scrollState), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold, color = Color.Red)
-
+            print("Hello 2=====>")
+            println(article)
 
             CoilImage(
                 imageModel = article.urlToImage,

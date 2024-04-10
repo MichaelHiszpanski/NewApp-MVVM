@@ -1,5 +1,6 @@
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -43,7 +44,9 @@ fun MainScreen(navController: NavHostController, scrollState: ScrollState){
 
 @Composable
 fun Navigation(navController: NavHostController, scrollState: ScrollState,newsManager:NewsManager= NewsManager(),paddingValues:PaddingValues){
-    val articles=newsManager.newsResponse.value.articles
+    val articles = mutableListOf(TopNewsArticle())
+    articles.addAll(newsManager.newsResponse.value.articles ?: listOf(TopNewsArticle()))
+    Log.d("NEws ===>","$articles")
    articles?.let{
        NavHost(navController = navController, startDestination = BottomMenuScreen.TopNews.route, modifier = Modifier.padding(paddingValues =paddingValues )) {
            bottomNavigation(navController=navController,articles,newsManager)
@@ -52,6 +55,13 @@ fun Navigation(navController: NavHostController, scrollState: ScrollState,newsMa
            ) { navBackStackEntry ->
                val index = navBackStackEntry.arguments?.getInt("index")
                index?.let {
+                   if (newsManager.query.value.isNotEmpty()) {
+                       articles.clear()
+                       articles.addAll(newsManager.searchNeWsResponse.value.articles?: listOf())
+                   }else{
+                       articles.clear()
+                       articles.addAll(newsManager.newsResponse.value.articles?: listOf())
+                   }
                    val article = articles[index]
                    DetailScreen(article, scrollState, navController)
                }
@@ -63,7 +73,7 @@ fun Navigation(navController: NavHostController, scrollState: ScrollState,newsMa
 }
 fun NavGraphBuilder.bottomNavigation(navController: NavController,articles:List<TopNewsArticle>,newsManager: NewsManager) {
     composable(BottomMenuScreen.TopNews.route) {
-        TopNews(navController = navController, articles =articles )
+        TopNews(navController = navController, articles =articles,newsManager=newsManager, query = newsManager.query )
     }
     composable(BottomMenuScreen.Categories.route) {
         newsManager.getArticlesByCategory("business")
