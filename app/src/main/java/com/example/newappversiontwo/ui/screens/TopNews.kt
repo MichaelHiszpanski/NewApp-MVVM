@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.newappversiontwo.ui.components.SearchBar
 import com.example.newappversiontwo.ui.components.TopNewsItem
 import com.example.newappversiontwo.models.TopNewsArticle
+import com.example.newappversiontwo.network.Api
 import com.example.newappversiontwo.network.NewsManager
 
 
@@ -47,7 +48,7 @@ fun TopNews(navController: NavController, articles:List<TopNewsArticle>, newsMan
 @Preview(showBackground = true)
 @Composable
 fun TopNewsPreview(){
-    val newsManager= NewsManager()
+    val newsManager= NewsManager(Api.retrofitService)
     TopNews( rememberNavController(), listOf(
         TopNewsArticle( author = "Namita Singh",
         title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",

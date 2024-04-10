@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import com.example.newappversiontwo.models.ArticleCategory
 import com.example.newappversiontwo.models.TopNewsResponse
-import com.example.newappversiontwo.models.getArticleCategory
+import com.example.newappversiontwo.models.getArticleCategoryFromEnum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -46,7 +46,7 @@ class NewsManager(private val service: NewsServiceInterface) {
     }
 
     fun onSelectedCategoryChanged(category:String){
-        val newCategory= getArticleCategory(category=category)
+        val newCategory= getArticleCategoryFromEnum(category=category)
         selectedCategory.value=newCategory
     }
 

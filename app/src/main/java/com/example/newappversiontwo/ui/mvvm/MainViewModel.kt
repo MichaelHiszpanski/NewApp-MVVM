@@ -8,7 +8,9 @@ import androidx.compose.runtime.remember
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newappversiontwo.MainApp
+import com.example.newappversiontwo.models.ArticleCategory
 import com.example.newappversiontwo.models.TopNewsResponse
+import com.example.newappversiontwo.models.getArticleCategoryFromEnum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,6 +37,9 @@ class MainViewModel(application:Application):AndroidViewModel(application) {
     val getArticleByCategory:StateFlow<TopNewsResponse>
        get() = _getArticleByCategory
 
+    private val _selectedCategory: MutableStateFlow<ArticleCategory?> = MutableStateFlow(null)
+    val selectedCategory:StateFlow<ArticleCategory?>
+        get() = _selectedCategory
     fun getArticlesByCategory(category:String){
         _isLoading.value=true
         viewModelScope.launch(Dispatchers.IO){
@@ -43,4 +48,8 @@ class MainViewModel(application:Application):AndroidViewModel(application) {
         _isLoading.value=false
     }
 
+    fun onSelectedCategoryChanged(category:String){
+        val newCategory= getArticleCategoryFromEnum(category=category)
+        _selectedCategory.value=newCategory
+    }
 }

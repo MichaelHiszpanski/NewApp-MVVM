@@ -9,10 +9,13 @@ import com.example.newappversiontwo.ui.components.ArticleContent
 import com.example.newappversiontwo.ui.components.CategoryTab
 import com.example.newappversiontwo.models.getAllArticleCategory
 import com.example.newappversiontwo.network.NewsManager
+import com.example.newappversiontwo.ui.mvvm.MainViewModel
 
 @Composable
-fun CategoriesScreen(onFetchCategory:(String)->Unit={}, newsManager: NewsManager, navController:NavController){
+fun CategoriesScreen(onFetchCategory:(String)->Unit={}, viewModel:MainViewModel, navController:NavController){
     val tabsItems= getAllArticleCategory()
+
+
     Column {
         LazyRow {
             items(tabsItems.size){
@@ -20,9 +23,9 @@ fun CategoriesScreen(onFetchCategory:(String)->Unit={}, newsManager: NewsManager
                 CategoryTab(
                     category = category.categoryName,
                     onFetchCategory=onFetchCategory,
-                    isSelected = newsManager.selectedCategory.value==category)
+                    isSelected = viewModel.selectedCategory.value==category)
             }
         }
-    ArticleContent(articles = newsManager.getArticleByCategory.value.articles?:listOf(), navController =navController )
+    ArticleContent(articles = viewModel.getArticleByCategory.value.articles?:listOf(), navController =navController )
     }
 }

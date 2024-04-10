@@ -19,7 +19,7 @@ fun getAllArticleCategory():List<ArticleCategory>{
 }
 
 
-fun getArticleCategory(category: String): ArticleCategory?{
+fun getArticleCategoryFromEnum(category: String): ArticleCategory?{
     val map= values().associateBy(ArticleCategory::categoryName)
     return map[category]
 }

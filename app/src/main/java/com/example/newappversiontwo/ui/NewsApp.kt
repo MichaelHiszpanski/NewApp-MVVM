@@ -52,7 +52,7 @@ fun Navigation(navController: NavHostController, scrollState: ScrollState, newsM
     Log.d("NEws ===>","$articles")
    articles?.let{
        NavHost(navController = navController, startDestination = BottomMenuScreen.TopNews.route, modifier = Modifier.padding(paddingValues =paddingValues )) {
-           bottomNavigation(navController=navController,articles,newsManager)
+           bottomNavigation(navController=navController,articles,newsManager, mainViewModel = mainViewModel)
            composable("detail/{index}",
                arguments = listOf(navArgument("index"){type= NavType.IntType})
            ) { navBackStackEntry ->
@@ -74,16 +74,16 @@ fun Navigation(navController: NavHostController, scrollState: ScrollState, newsM
        }
    }
 }
-fun NavGraphBuilder.bottomNavigation(navController: NavController, articles:List<TopNewsArticle>, newsManager: NewsManager) {
+fun NavGraphBuilder.bottomNavigation(navController: NavController, articles:List<TopNewsArticle>, newsManager: NewsManager,mainViewModel:MainViewModel) {
     composable(BottomMenuScreen.TopNews.route) {
         TopNews(navController = navController, articles =articles,newsManager=newsManager, query = newsManager.query )
     }
     composable(BottomMenuScreen.Categories.route) {
-       // newsManager.getArticlesByCategory("business")
-        newsManager.onSelectedCategoryChanged("business")
-        CategoriesScreen(newsManager=newsManager, onFetchCategory = {
-            newsManager.onSelectedCategoryChanged(it)
-            newsManager.getArticlesByCategory(it)
+        mainViewModel.getArticlesByCategory("business")
+        mainViewModel.onSelectedCategoryChanged("business")
+        CategoriesScreen(viewModel =mainViewModel , onFetchCategory = {
+           mainViewModel.onSelectedCategoryChanged(it)
+            mainViewModel.getArticlesByCategory(it)
         }, navController = navController)
     }
     composable(BottomMenuScreen.Sources.route) {
