@@ -1,4 +1,4 @@
-package com.example.newappversiontwo.ui.network
+package com.example.newappversiontwo.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

@@ -26,7 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.newappversiontwo.ui.network.NewsManager
+import com.example.newappversiontwo.network.NewsManager
 import com.example.newappversiontwo.ui.components.SourceContent
 
 @Composable

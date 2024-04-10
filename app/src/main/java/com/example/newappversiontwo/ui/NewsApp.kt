@@ -16,34 +16,37 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.newappversiontwo.ui.models.MockData
+import com.example.newappversiontwo.models.MockData
 import com.example.newappversiontwo.ui.components.BottomMenu
-import com.example.newappversiontwo.ui.models.TopNewsArticle
-import com.example.newappversiontwo.ui.network.NewsManager
+import com.example.newappversiontwo.models.TopNewsArticle
+import com.example.newappversiontwo.network.Api
+import com.example.newappversiontwo.network.NewsManager
+import com.example.newappversiontwo.ui.mvvm.MainViewModel
 import com.example.newappversiontwo.ui.screens.BottomMenuScreen
 import com.example.newappversiontwo.ui.screens.CategoriesScreen
 import com.example.newappversiontwo.ui.screens.SourcesScreen
 
 
 @Composable
-fun NewsApp() {
+fun NewsApp(mainViewModel:MainViewModel) {
     val navController = rememberNavController()
     val scrollState: ScrollState = rememberScrollState()
-    MainScreen(navController =navController , scrollState )
+    MainScreen(navController =navController , scrollState ,mainViewModel=mainViewModel)
 
 
 }
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen(navController: NavHostController, scrollState: ScrollState){
+fun MainScreen(navController: NavHostController, scrollState: ScrollState,mainViewModel:MainViewModel){
     Scaffold(bottomBar = {BottomMenu(navController)}) {
-        Navigation(navController=navController,scrollState=scrollState, paddingValues = it)
+        Navigation(navController=navController,scrollState=scrollState, paddingValues = it, mainViewModel = mainViewModel)
 
     }
 }
 
 @Composable
-fun Navigation(navController: NavHostController, scrollState: ScrollState,newsManager:NewsManager= NewsManager(),paddingValues:PaddingValues){
+fun Navigation(navController: NavHostController, scrollState: ScrollState, newsManager: NewsManager = NewsManager(
+    Api.retrofitService), paddingValues:PaddingValues,mainViewModel:MainViewModel){
     val articles = mutableListOf(TopNewsArticle())
     articles.addAll(newsManager.newsResponse.value.articles ?: listOf(TopNewsArticle()))
     Log.d("NEws ===>","$articles")
@@ -71,12 +74,12 @@ fun Navigation(navController: NavHostController, scrollState: ScrollState,newsMa
        }
    }
 }
-fun NavGraphBuilder.bottomNavigation(navController: NavController,articles:List<TopNewsArticle>,newsManager: NewsManager) {
+fun NavGraphBuilder.bottomNavigation(navController: NavController, articles:List<TopNewsArticle>, newsManager: NewsManager) {
     composable(BottomMenuScreen.TopNews.route) {
         TopNews(navController = navController, articles =articles,newsManager=newsManager, query = newsManager.query )
     }
     composable(BottomMenuScreen.Categories.route) {
-        newsManager.getArticlesByCategory("business")
+       // newsManager.getArticlesByCategory("business")
         newsManager.onSelectedCategoryChanged("business")
         CategoriesScreen(newsManager=newsManager, onFetchCategory = {
             newsManager.onSelectedCategoryChanged(it)

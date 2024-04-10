@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.newappversiontwo.R
-import com.example.newappversiontwo.ui.models.TopNewsArticle
+import com.example.newappversiontwo.models.TopNewsArticle
 import com.skydoves.landscapist.coil.CoilImage
 
 @Composable

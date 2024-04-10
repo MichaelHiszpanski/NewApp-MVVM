@@ -1,4 +1,4 @@
-package com.example.newappversiontwo.ui.models
+package com.example.newappversiontwo.models
 
 data class Source(
     val id:String?=null,

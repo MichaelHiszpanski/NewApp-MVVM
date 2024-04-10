@@ -33,11 +33,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.newappversiontwo.ui.models.MockData
-import com.example.newappversiontwo.ui.models.MockData.getTimeAgo
-import com.example.newappversiontwo.ui.models.NewsData
+import com.example.newappversiontwo.models.MockData
+import com.example.newappversiontwo.models.MockData.getTimeAgo
+import com.example.newappversiontwo.models.NewsData
 import com.example.newappversiontwo.R
-import com.example.newappversiontwo.ui.models.TopNewsArticle
+import com.example.newappversiontwo.models.TopNewsArticle
 import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
@@ -116,7 +116,8 @@ fun DetailTopAppBar(onBackPressed:()-> Unit = {}){
 fun DetailScreenPreview(){
     val mockNavController = rememberNavController()
 
-    DetailScreen(TopNewsArticle( author = "Namita Singh",
+    DetailScreen(
+        TopNewsArticle( author = "Namita Singh",
         title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
         description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
         publishedAT = "2021-11-04T04:42:40Z"), rememberScrollState(),mockNavController)

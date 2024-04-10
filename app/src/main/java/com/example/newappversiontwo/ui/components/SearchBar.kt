@@ -22,7 +22,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.newappversiontwo.ui.network.NewsManager
+import com.example.newappversiontwo.network.NewsManager
 
 @Composable
 fun SearchBar(query:MutableState<String>,newsManager: NewsManager){

@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.newappversiontwo.ui.components.ArticleContent
 import com.example.newappversiontwo.ui.components.CategoryTab
-import com.example.newappversiontwo.ui.models.getAllArticleCategory
-import com.example.newappversiontwo.ui.network.NewsManager
+import com.example.newappversiontwo.models.getAllArticleCategory
+import com.example.newappversiontwo.network.NewsManager
 
 @Composable
-fun CategoriesScreen(onFetchCategory:(String)->Unit={},newsManager:NewsManager,navController:NavController){
+fun CategoriesScreen(onFetchCategory:(String)->Unit={}, newsManager: NewsManager, navController:NavController){
     val tabsItems= getAllArticleCategory()
     Column {
         LazyRow {

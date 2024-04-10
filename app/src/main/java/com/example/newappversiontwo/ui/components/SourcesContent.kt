@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.example.newappversiontwo.R
-import com.example.newappversiontwo.ui.models.TopNewsArticle
+import com.example.newappversiontwo.models.TopNewsArticle
 
 @Composable
 fun SourceContent(articles:List<TopNewsArticle>){
