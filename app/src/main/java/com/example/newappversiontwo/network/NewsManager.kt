@@ -1,17 +1,19 @@
-package com.example.newappversiontwo.ui.network
+package com.example.newappversiontwo.network
 
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
-import com.example.newappversiontwo.ui.models.ArticleCategory
-import com.example.newappversiontwo.ui.models.TopNewsResponse
-import com.example.newappversiontwo.ui.models.getArticleCategory
+import com.example.newappversiontwo.models.ArticleCategory
+import com.example.newappversiontwo.models.TopNewsResponse
+import com.example.newappversiontwo.models.getArticleCategoryFromEnum
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class NewsManager {
+class NewsManager(private val service: NewsServiceInterface) {
     private val _newsResponse= mutableStateOf(TopNewsResponse())
 
     val newsResponse:State<TopNewsResponse>
@@ -26,66 +28,29 @@ class NewsManager {
             _getArticleBySource
         }
 
-    private val _getArticleByCategory=mutableStateOf(TopNewsResponse())
-    val getArticleByCategory: MutableState<TopNewsResponse>
-        @Composable get() = remember {
-            _getArticleByCategory
-        }
+
     private val _searchNewsResponse=mutableStateOf(TopNewsResponse())
     val searchNeWsResponse: MutableState<TopNewsResponse>
         @Composable get() = remember {
             _searchNewsResponse
         }
     val query= mutableStateOf("")
-    init {
-        getArticles()
-    }
-    private  fun getArticles(){
-        val service=Api.retrofitService.getTopArticles("gb",Api.API_KEY)
-        service.enqueue(object  : Callback<TopNewsResponse> {
-            override fun onResponse(
-                call: Call<TopNewsResponse>,
-                response: Response<TopNewsResponse>
-            ) {
-                if (response.isSuccessful){
-                    _newsResponse.value = response.body()!!
-                    Log.d("news","${_newsResponse.value}")
-                }else{
-                    Log.d("error","${response.errorBody()}")
-                }
-            }
 
-            override fun onFailure(call: Call<TopNewsResponse>, t: Throwable) {
-                Log.d("error","${t.printStackTrace()}")
-            }
-
-        })
-    }
-
-    fun onSelectedCategoryChanged(category:String){
-        val newCategory= getArticleCategory(category=category)
-        selectedCategory.value=newCategory
-    }
-
-    fun getArticlesByCategory(category:String){
-        val service = Api.retrofitService.getArticlesByCategory(category)
-        service.enqueue(object : Callback<TopNewsResponse> {
-            override fun onResponse(call: Call<TopNewsResponse>, response: Response<TopNewsResponse>) {
-                if (response.isSuccessful){
-                    _getArticleByCategory.value = response.body()!!
-                    Log.d("category","${_getArticleByCategory.value}")
-                }else{
-                    Log.d("error","${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<TopNewsResponse>, t: Throwable) {
-                Log.d("error","${t.printStackTrace()}")
-            }
-
-        })
+    suspend  fun getArticles(country:String): TopNewsResponse = withContext(Dispatchers.IO){
+        service.getTopArticles(country=country)
 
     }
+    suspend fun getArticlesByCategory(category:String): TopNewsResponse = withContext(Dispatchers.IO){
+
+        service.getArticlesByCategory(category=category)
+    }
+
+//    fun onSelectedCategoryChanged(category:String){
+//        val newCategory= getArticleCategoryFromEnum(category=category)
+//        selectedCategory.value=newCategory
+//    }
+
+
 
 
     fun getArticlesBySource(){

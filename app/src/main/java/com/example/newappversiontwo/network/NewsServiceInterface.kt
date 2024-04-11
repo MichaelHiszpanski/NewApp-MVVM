@@ -1,18 +1,17 @@
-package com.example.newappversiontwo.ui.network
+package com.example.newappversiontwo.network
 
-import com.example.newappversiontwo.ui.models.TopNewsResponse
+import com.example.newappversiontwo.models.TopNewsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsServiceInterface {
     @GET("top-headlines")
-    fun getTopArticles(@Query("country") country:String,
-                       @Query("apiKey") apiKey:String): Call<TopNewsResponse>
+    suspend fun getTopArticles(@Query("country") country:String): TopNewsResponse
 
     @GET("top-headlines")
-    fun getArticlesByCategory(@Query("category")category:String
-    ): Call<TopNewsResponse>
+    suspend fun getArticlesByCategory(@Query("category")category:String
+    ): TopNewsResponse
 
     @GET("everything")
     fun getArticlesBySource(@Query("sources")source:String

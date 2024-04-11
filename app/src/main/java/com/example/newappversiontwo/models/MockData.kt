@@ -1,4 +1,4 @@
-package com.example.newappversiontwo.ui.models
+package com.example.newappversiontwo.models
 
 import android.os.Build
 import android.util.Log

@@ -1,5 +1,5 @@
-package com.example.newappversiontwo.ui.models
-import com.example.newappversiontwo.ui.models.ArticleCategory.*;
+package com.example.newappversiontwo.models
+import com.example.newappversiontwo.models.ArticleCategory.*;
 enum class ArticleCategory(val categoryName:String) {
     BUSINESS("business"),
     ENTERTAINMENT("entertainment"),
@@ -10,7 +10,8 @@ enum class ArticleCategory(val categoryName:String) {
     TECHNOLOGY("technology")
 }
 fun getAllArticleCategory():List<ArticleCategory>{
-    return listOf(ArticleCategory.BUSINESS,
+    return listOf(
+        ArticleCategory.BUSINESS,
         ArticleCategory.ENTERTAINMENT, ArticleCategory.GENERAL,
         ArticleCategory.HEALTH, ArticleCategory.SCIENCE, ArticleCategory.SPORTS,
         ArticleCategory.TECHNOLOGY
@@ -18,7 +19,7 @@ fun getAllArticleCategory():List<ArticleCategory>{
 }
 
 
-fun getArticleCategory(category: String):ArticleCategory?{
+fun getArticleCategoryFromEnum(category: String): ArticleCategory?{
     val map= values().associateBy(ArticleCategory::categoryName)
     return map[category]
 }

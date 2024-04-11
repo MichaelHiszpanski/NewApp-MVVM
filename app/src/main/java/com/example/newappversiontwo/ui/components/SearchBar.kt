@@ -22,13 +22,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.newappversiontwo.ui.network.NewsManager
+import com.example.newappversiontwo.network.Api
+import com.example.newappversiontwo.network.NewsManager
+import com.example.newappversiontwo.network.NewsServiceInterface
 
 @Composable
 fun SearchBar(query:MutableState<String>,newsManager: NewsManager){
     val localFocusManager= LocalFocusManager.current
     Card(elevation = 6.dp, shape = RoundedCornerShape(4.dp),
-    modifier = Modifier.padding(8.dp),
+    modifier = Modifier.padding(9.dp),
     backgroundColor = MaterialTheme.colors.primary) {
         TextField(value = query.value, onValueChange = {
             query.value=it
@@ -82,5 +84,6 @@ fun SearchBar(query:MutableState<String>,newsManager: NewsManager){
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview(){
-    SearchBar(query = mutableStateOf(""), newsManager = NewsManager())
+    val service: NewsServiceInterface
+    SearchBar(query = mutableStateOf(""), newsManager = NewsManager(Api.retrofitService))
 }

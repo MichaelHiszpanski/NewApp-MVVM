@@ -15,12 +15,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.newappversiontwo.ui.components.SearchBar
 import com.example.newappversiontwo.ui.components.TopNewsItem
-import com.example.newappversiontwo.ui.models.TopNewsArticle
-import com.example.newappversiontwo.ui.network.NewsManager
+import com.example.newappversiontwo.models.TopNewsArticle
+import com.example.newappversiontwo.network.Api
+import com.example.newappversiontwo.network.NewsManager
 
 
 @Composable
-fun TopNews(navController: NavController,articles:List<TopNewsArticle>, newsManager: NewsManager,query: MutableState<String>){
+fun TopNews(navController: NavController, articles:List<TopNewsArticle>, newsManager: NewsManager, query: MutableState<String>){
     Column ( modifier = Modifier
         .fillMaxWidth()
         .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally){
@@ -47,10 +48,12 @@ fun TopNews(navController: NavController,articles:List<TopNewsArticle>, newsMana
 @Preview(showBackground = true)
 @Composable
 fun TopNewsPreview(){
-    val newsManager=NewsManager()
-    TopNews( rememberNavController(), listOf(TopNewsArticle( author = "Namita Singh",
+    val newsManager= NewsManager(Api.retrofitService)
+    TopNews( rememberNavController(), listOf(
+        TopNewsArticle( author = "Namita Singh",
         title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
         description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
-        publishedAT = "2021-11-04T04:42:40Z")), newsManager =newsManager , query = newsManager.query
+        publishedAT = "2021-11-04T04:42:40Z")
+    ), newsManager =newsManager , query = newsManager.query
     )
 }

@@ -18,9 +18,9 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.newappversiontwo.R
-import com.example.newappversiontwo.ui.models.MockData
-import com.example.newappversiontwo.ui.models.MockData.getTimeAgo
-import com.example.newappversiontwo.ui.models.TopNewsArticle
+import com.example.newappversiontwo.models.MockData
+import com.example.newappversiontwo.models.MockData.getTimeAgo
+import com.example.newappversiontwo.models.TopNewsArticle
 
 @Composable
 fun TopNewsItem(article: TopNewsArticle, onNewsClick:()->Unit={}){
