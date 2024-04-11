@@ -2,7 +2,6 @@ package com.example.newappversiontwo.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -10,7 +9,6 @@ import androidx.navigation.NavController
 import com.example.newappversiontwo.ui.components.ArticleContent
 import com.example.newappversiontwo.ui.components.CategoryTab
 import com.example.newappversiontwo.models.getAllArticleCategory
-import com.example.newappversiontwo.network.NewsManager
 import com.example.newappversiontwo.ui.mvvm.MainViewModel
 
 @Composable

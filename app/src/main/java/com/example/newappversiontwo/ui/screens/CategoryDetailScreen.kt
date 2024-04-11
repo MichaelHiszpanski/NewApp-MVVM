@@ -1,4 +1,7 @@
-import androidx.compose.foundation.Image
+package com.example.newappversiontwo.ui.screens
+
+import DetailTopAppBar
+import InfoWithIcon
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,25 +12,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,13 +30,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.newappversiontwo.models.MockData
 import com.example.newappversiontwo.models.MockData.getTimeAgo
-import com.example.newappversiontwo.models.NewsData
 import com.example.newappversiontwo.R
 import com.example.newappversiontwo.models.TopNewsArticle
 import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
-fun DetailScreen(article: TopNewsArticle, scrollState: ScrollState, navController: NavController) {
+fun CategoryDetailScreen(article: TopNewsArticle, scrollState: ScrollState, navController: NavController) {
 
     Scaffold(topBar = {
         DetailTopAppBar(onBackPressed = { navController.popBackStack()});
@@ -83,40 +77,16 @@ fun DetailScreen(article: TopNewsArticle, scrollState: ScrollState, navControlle
 
 }
 
-@Composable
-fun InfoWithIcon(icon: ImageVector, info: String) {
-    Row {
-        Icon(
-            icon,
-            contentDescription = "Author",
-            modifier = Modifier.padding(end = 8.dp),
-            colorResource(
-                id = R.color.purple_500
-            )
-        )
-        Text(text = info)
-    }
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DetailTopAppBar(onBackPressed:()-> Unit = {}){
-    SmallTopAppBar(
-        title = { Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold) },
-        navigationIcon = {
-            IconButton(onClick = onBackPressed) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
-            }
-        }
-    )
-}
+
+
 @Preview(showBackground = true)
 @Composable
-fun DetailScreenPreview(){
+fun DetailCategoryScreenPreview(){
     val mockNavController = rememberNavController()
 
-    DetailScreen(
+    CategoryDetailScreen(
         TopNewsArticle( author = "Namita Singh",
-        title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
-        description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
-        publishedAT = "2021-11-04T04:42:40Z"), rememberScrollState(),mockNavController)
+            title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
+            description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
+            publishedAT = "2021-11-04T04:42:40Z"), rememberScrollState(),mockNavController)
 }

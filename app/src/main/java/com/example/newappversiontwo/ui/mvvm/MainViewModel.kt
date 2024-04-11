@@ -33,6 +33,10 @@ class MainViewModel(application:Application):AndroidViewModel(application) {
         }
         _isLoading.value=false
     }
+    private val _getArticlesAll= MutableStateFlow(TopNewsResponse())
+    val getArticlesAll:StateFlow<TopNewsResponse>
+        get() = _getArticlesAll
+
     private val _getArticleByCategory= MutableStateFlow(TopNewsResponse())
     val getArticleByCategory:StateFlow<TopNewsResponse>
        get() = _getArticleByCategory

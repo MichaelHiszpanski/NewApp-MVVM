@@ -53,7 +53,7 @@ fun CategoryItem(article: TopNewsArticle, modifier: Modifier = Modifier, onNewsC
                     horizontalArrangement = Arrangement.SpaceBetween
                 ){
                     Text(text = article.author?:"Not Available")
-                    //Text(text = MockData.stringToDate(article.publishedAT?:"2022-03-08T20:45:20").getTimeAgo())
+                  
 
 
 

@@ -27,8 +27,6 @@ fun BottomMenu(navController: NavController){
                 unselectedContentColor = Color.Gray,
                 onClick = {
                     navController.navigate(route = it.route) {
-                        // This block is commented out in your code snippet but could be used for custom navigation logic
-                        // Example: Clearing the stack up to a certain destination
                         navController.graph.startDestinationRoute?.let { route ->
                             popUpTo(route) {
                                 saveState = true
