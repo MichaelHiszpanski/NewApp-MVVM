@@ -45,10 +45,10 @@ class NewsManager(private val service: NewsServiceInterface) {
         service.getArticlesByCategory(category=category)
     }
 
-    fun onSelectedCategoryChanged(category:String){
-        val newCategory= getArticleCategoryFromEnum(category=category)
-        selectedCategory.value=newCategory
-    }
+//    fun onSelectedCategoryChanged(category:String){
+//        val newCategory= getArticleCategoryFromEnum(category=category)
+//        selectedCategory.value=newCategory
+//    }
 
 
 

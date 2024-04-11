@@ -67,6 +67,8 @@ dependencies {
     implementation ("com.github.skydoves:landscapist-coil:1.4.1")//display response
     implementation ("com.squareup.okhttp3:logging-interceptor:4.7.2")
    // implementation ("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    implementation("androidx.compose.runtime:runtime:1.6.5")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.5")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
